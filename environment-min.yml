@@ -1,0 +1,17 @@
+name: fenicsx
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - fenics-ufl
+  - fenics-basix
+  - fenics-dolfinx
+  - mpi4py
+  - jupyterlab
+  - ipywidgets
+  - gmsh
+  - python-gmsh
+  - pyvista
+  - vtk
+prefix: /home/rathraiser/miniconda3/envs/fenicsx
