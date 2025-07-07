@@ -1,0 +1,15 @@
+# build artefacts
+build/
+*.o
+*.so*
+CMakeFiles/
+CMakeCache.txt
+
+# Python
+__pycache__/
+*.py[co]
+
+# VS Code & virtual‑envs
+.vscode/
+.env/
+venv/

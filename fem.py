@@ -29,8 +29,7 @@ from dolfinx.fem import (
     functionspace, locate_dofs_topological, dirichletbc, Constant, form,
 )
 from dolfinx.fem.petsc import assemble_matrix
-
-hmax = 0.05               # element size   (≈ #dofs ~ O(hmax⁻²))
+hmax = 0.0325            # element size   (≈ #dofs ~ O(hmax⁻²))
 delta = 0.01              # coefficient parameter from Eq.(5)
 def vec_numpy(v: PETSc.Vec) -> np.ndarray:
     """Return *read‑write* NumPy view of a PETSc Vec — works on every version."""
@@ -67,7 +66,8 @@ if rank == 0:
 # 2.  FE space (continuous P1) -----------------------------------------
 # ----------------------------------------------------------------------
 V = functionspace(domain, ("Lagrange", 1))
-
+num_dofs = V.dofmap.index_map.size_global
+print(f"Number of dofs: {num_dofs} (hmax = {hmax})") if rank == 0 else None
 # ----------------------------------------------------------------------
 # 3.  Dirichlet wall BC on Γ (boundary tag = 1) ------------------------
 # ----------------------------------------------------------------------
@@ -102,7 +102,7 @@ eps = SLEPc.EPS().create(domain.comm)
 eps.setOperators(A, M)
 eps.setProblemType(SLEPc.EPS.ProblemType.GHEP)
 
-nev = 8                       # ask for 8 modes (change as you like)
+nev = 10                      # ask for 8 modes (change as you like)
 eps.setDimensions(nev=nev, ncv=PETSc.DECIDE)
 
 # default is SMALLEST_REAL; user can override from CLI

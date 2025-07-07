@@ -5,7 +5,7 @@ import matplotlib.tri as mtri
 from mpl_toolkits.mplot3d import Axes3D
 
 # 1. Load your data file with columns x, y, u
-data = np.loadtxt("mode1.dat")    # ensure mode0.dat is in the same folder
+data = np.loadtxt("mode0.dat")    # ensure mode0.dat is in the same folder
 x, y, z = data.T
 
 # 2. Build a Triangulation for the unstructured mesh
